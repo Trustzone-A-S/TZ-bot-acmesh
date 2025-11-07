@@ -207,3 +207,6 @@ function ordering() {
     echo ""
     echo "Your certificate is here: $path"
 }
+
+upkeep
+start_prompt
