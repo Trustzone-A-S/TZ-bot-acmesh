@@ -174,9 +174,9 @@ function new_cert() {
 
     #domains
     if [[ "$domain" == "*."* ]]; then
-        domain_non_wc="${domain#*.}"
+        domain_non_wc=""${domain#*.}""
         domain_var="-d "${domain:?}" -d "${domain_non_wc:?}""
-        domain_install="_.${domain#*.}"
+        domain_install="_."${domain#*.}""
     else
         domain_var="-d "${domain:?}""
     fi
