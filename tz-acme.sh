@@ -163,7 +163,7 @@ function new_cert() {
     #eab var
     eab="--eab-kid "${eab_kid:?}" --eab-hmac-key "${eab_hmac:?}""
 
-    if acme.sh --register-account $registration $eab; then
+    if /root/.acme.sh/acme.sh --register-account $registration $eab; then
         echo ""
         echo "Registration success."
     else
@@ -186,7 +186,7 @@ function new_cert() {
 }
 function ordering() {
     echo "acme.sh command: acme.sh --issue --server https://emea.acme.atlas.globalsign.com/directory $val_var -k 2048 $domain_var"
-    if acme.sh --issue --server https://emea.acme.atlas.globalsign.com/directory $val_var -k 2048 $domain_var; then
+    if /root/.acme.sh/acme.sh --issue --server https://emea.acme.atlas.globalsign.com/directory $val_var -k 2048 $domain_var; then
         echo "Certificate received."
         read -p "Where should we install it?" install_path
         echo ""
