@@ -27,7 +27,6 @@ function upkeep() {
         fi
     fi
     mkdir -p /etc/tz-acmesh/scripts/
-    mkdir -p /etc/tz-acmesh/certs/
     
     if ! [ -e "/etc/tz-acmesh/scripts/.azure_credentials" ] ; then
         touch /etc/tz-acmesh/scripts/.azure_credentials
@@ -233,7 +232,7 @@ function renewal_management() {
             ;;
         3)
             echo ""
-            echo "Listen renewals: "
+            echo "Listing renewals: "
             read -p "Please enter the domain of the renewal you wish to remove: " remove_renew
             /root/.acme.sh/acme.sh --remove --domain $remove_renew
             renewal_management
@@ -247,6 +246,35 @@ function renewal_management() {
             ;;
     esac
 }
-
+function uninstall() {
+    echo ""
+    echo "Welcome to the TZ-acmesh and acme.sh uninstaller."
+    echo "This will uninstall TZ-acmesh and acme.sh from your system."
+    read -n 1 -p "Are you sure you want to proceed? (y/n): " confirm_uninstall
+    echo
+    if [[ "$confirm_uninstall" == "y" ]]; then
+        echo "Uninstalling TZ-acmesh and acme.sh..."
+        if sudo rm -rf /etc/tz-acmesh/; then
+            echo "removed /etc/tz-acmesh/ and all contents inside"
+        else
+            echo "Error deleting /etc/tz-acmesh/"
+        fi
+        /root/.acme.sh/acme.sh --uninstall
+        if command -v /root/.acme.sh/acme.sh >/dev/null 2>&1; then
+            echo "Uninstallation of acme.sh failed. Please remove manually."
+        else
+            echo "acme.sh have been uninstalled successfully."
+        fi
+        if command -v tz-acmesh >/dev/null 2>&1; then
+            echo "Uninstallation of TZ-acmesh failed. Please remove manually."
+        else
+            echo "TZ-acmesh have been uninstalled successfully."
+        fi
+        exit
+    else
+        echo "Uninstallation cancelled."
+        exit
+    fi
+}
 upkeep
 start_prompt
