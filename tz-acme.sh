@@ -179,6 +179,7 @@ function new_cert() {
         domain_install="_."${domain#*.}""
     else
         domain_var="-d "${domain:?}""
+        domain_install=""${domain:?}""
     fi
 
     ordering
