@@ -283,7 +283,7 @@ function dns_full() {
     echo "2. AWS/Route 53"
     echo "3. Cloudflare"
     echo "4. Domeneshop"
-    echo "5. Google DNS"
+    echo "5. Google DNS (NOT WORKING ATM)"
     read -n 1 -p "Enter choice [1-5]: " renewal_choice
     echo ""
     case $renewal_choice in
@@ -385,6 +385,7 @@ function dns_full() {
         5)
             val_var="--dns dns_googledomains"
             #export GOOGLEDOMAINS_ACCESS_TOKEN="<generated-access-token>"
+            ;;
         *)
             echo "Invalid choice. Exiting."
             exit 1
