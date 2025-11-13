@@ -282,11 +282,11 @@ function uninstall() {
 function dns_full() {
     echo ""
     echo "Which DNS provider would you like to use?"
-    echo "1. Azure DNS"
+    echo "1. Azure"
     echo "2. AWS/Route 53"
     echo "3. Cloudflare"
     echo "4. Domeneshop"
-    echo "5. Google Domains DNS"
+    echo "5. Google Domains"
     read -n 1 -p "Enter choice [1-5]: " renewal_choice
     echo ""
     case $renewal_choice in
