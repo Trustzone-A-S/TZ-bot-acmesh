@@ -19,17 +19,15 @@ function upkeep() {
         if [[ "$install_choice" == "y" ]]; then
             echo ""
             echo "Installing acme.sh..."
-            if curl https://get.acme.sh | sh -s email=my@example.com; then
-                echo "Install success"
-            else
-                echo "Error while installing, exiting..."
-                exit 1
-            fi
         else
             echo ""
             echo "acme.sh is required to use TZ-acme.sh. If you need help installing acme.sh, please contact TRUSTZONE support at support@trustzone.com"
             exit 1
         fi
+    fi
+    if ! command -v /root/.acme.sh/acme.sh >/dev/null 2>&1; then
+        echo "acme.sh could not be installed. Please install manually."
+        exit 1
     fi
     mkdir -p /etc/tz-acmesh/scripts/
     
