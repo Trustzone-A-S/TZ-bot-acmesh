@@ -210,7 +210,6 @@ function ordering() {
         exit
     fi
     echo ""
-    echo "Your certificate is here: $path"
 }
 function renewal_management() {
     echo ""
