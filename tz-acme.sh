@@ -18,10 +18,11 @@ function upkeep() {
                 -o "$0.tmp" &&
             mv "$0.tmp" "$0" &&
             chmod +x "$0"
+            echo ""
             echo "Update done!"
+            exit 0
         fi
     fi
-    echo "TZ-acme.sh has been updated to version: (v$local_version)"
 
     if ! command -v /root/.acme.sh/acme.sh >/dev/null 2>&1; then
         echo "acme.sh is not installed."
