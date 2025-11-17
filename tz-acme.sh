@@ -1,6 +1,6 @@
 #!/bin/bash
 function upkeep() {
-    local_version="0.2"
+    local_version="0.3"
     version_gt() {
     [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
     }
@@ -418,6 +418,6 @@ function dns_full() {
             ;;
     esac
 }
-echo "Welcome to TZ-Bot V0.1 (ACME.SH)"
+echo "Welcome to TZ-Bot V0.3 (ACME.SH)"
 upkeep
 start_prompt
