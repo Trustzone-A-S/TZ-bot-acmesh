@@ -10,19 +10,10 @@ function upkeep() {
         echo "Error fetching remote version."
         exit 1
     fi
-echo "=== DEBUG ==="
-echo "local_version:  '$local_version'"
-echo "remote_version: '$remote_version'"
-echo "local hex:"
-printf '%s' "$local_version"  | hexdump -C
-echo "remote hex:"
-printf '%s' "$remote_version" | hexdump -C
-echo "=============="
-
     if version_gt "$remote_version" "$local_version"; then
         read -n 1 -p "New version found: $remote_version. Do you want to update? (y/n): " update_choice
         if [[ "$update_choice" == "y" ]]; then
-            curl -fsSL "https://example.com/myscript.sh" \
+            curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/tz-acme.sh" \
         -o "$SCRIPT_PATH.tmp" || exit 1
 
         mv "$SCRIPT_PATH.tmp" "$SCRIPT_PATH"
