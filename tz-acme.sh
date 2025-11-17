@@ -1,10 +1,9 @@
 #!/bin/bash
 function upkeep() {
-    local_version="0.5"
+    local_version="0.4"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
-    [ "$1" != "$2" ] && \
-    [ "$(printf "%s\n%s" "$1" "$2" | sort -V | tail -n1)" = "$1" ]
+    [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
 }
     remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt"  | tr -d '\r' | tr -d '\n' | xargs)
     if [ -z "$remote_version" ]; then
@@ -419,6 +418,6 @@ function dns_full() {
             ;;
     esac
 }
-echo "Welcome to TZ-Acme.sh V0.5 (ACME.SH)"
+echo "Welcome to TZ-Acme.sh V0.4 (ACME.SH)"
 upkeep
 start_prompt
