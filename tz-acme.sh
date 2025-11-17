@@ -3,7 +3,8 @@ function upkeep() {
     local_version="1.0"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
-    [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
+    [ "$1" != "$2" ] && \
+    [ "$(printf "%s\n%s\n" "$2" "$1" | sort -V | head -n1)" = "$2" ]
 }
     remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt"  | tr -d '\r' | tr -d '\n' | xargs)
     if [ -z "$remote_version" ]; then
