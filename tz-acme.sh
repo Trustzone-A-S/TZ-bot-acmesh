@@ -2,9 +2,9 @@
 function upkeep() {
     local_version="0.3"
     version_gt() {
-    [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
-    }
-    
+    printf "%s\n%s" "$1" "$2" | sort -V | tail -n1 | grep -qx "$1"
+}
+    SCRIPT_PATH="$(readlink -f "$0")"
     remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt")
     if [ -z "$remote_version" ]; then
         echo "Error fetching remote version."
@@ -14,10 +14,11 @@ function upkeep() {
     if version_gt "$remote_version" "$local_version"; then
         read -n 1 -p "New version found: $remote_version. Do you want to update? (y/n): " update_choice
         if [[ "$update_choice" == "y" ]]; then
-            curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/tz-acme.sh" \
-                -o "$0.tmp" &&
-            mv "$0.tmp" "$0" &&
-            chmod +x "$0"
+            curl -fsSL "https://example.com/myscript.sh" \
+        -o "$SCRIPT_PATH.tmp" || exit 1
+
+        mv "$SCRIPT_PATH.tmp" "$SCRIPT_PATH"
+        chmod +x "$SCRIPT_PATH"
             echo ""
             echo "Update done!"
             exit 0
