@@ -1,6 +1,6 @@
 #!/bin/bash
 function upkeep() {
-    local_version="0.4"
+    local_version="0.5"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
     [ "$1" != "$2" ] && \
@@ -419,6 +419,6 @@ function dns_full() {
             ;;
     esac
 }
-echo "Welcome to TZ-Acme.sh V0.4 (ACME.SH)"
+echo "Welcome to TZ-Acme.sh V0.5 (ACME.SH)"
 upkeep
 start_prompt
