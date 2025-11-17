@@ -1,7 +1,7 @@
 #!/bin/bash
 function upkeep() {
     local_version="0.4"
-    SCRIPT_PATH="$(readlink -f "$0")"
+    SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
     [ "$1" != "$2" ] && \
     [ "$(printf "%s\n%s" "$1" "$2" | sort -V | tail -n1)" = "$1" ]
