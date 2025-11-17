@@ -5,7 +5,7 @@ function upkeep() {
     version_gt() {
     printf "%s\n%s" "$1" "$2" | sort -V | tail -n1 | grep -qx "$1"
 }
-    remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt")
+    remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt"  | tr -d '\r' | tr -d '\n' | xargs)
     if [ -z "$remote_version" ]; then
         echo "Error fetching remote version."
         exit 1
