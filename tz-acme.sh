@@ -1,6 +1,6 @@
 #!/bin/bash
 function upkeep() {
-    local_version="0.1"
+    local_version="0.2"
     version_gt() {
     [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
     }
