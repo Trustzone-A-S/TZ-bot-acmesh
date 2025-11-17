@@ -1,10 +1,10 @@
 #!/bin/bash
 function upkeep() {
     local_version="0.3"
+    SCRIPT_PATH="$(readlink -f "$0")"
     version_gt() {
     printf "%s\n%s" "$1" "$2" | sort -V | tail -n1 | grep -qx "$1"
 }
-    SCRIPT_PATH="$(readlink -f "$0")"
     remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt")
     if [ -z "$remote_version" ]; then
         echo "Error fetching remote version."
