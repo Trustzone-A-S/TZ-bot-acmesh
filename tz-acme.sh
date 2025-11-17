@@ -1,6 +1,6 @@
 #!/bin/bash
 function upkeep() {
-    local_version="0.3"
+    local_version="0.4"
     SCRIPT_PATH="$(readlink -f "$0")"
     version_gt() {
     [ "$1" != "$2" ] && \
@@ -20,7 +20,7 @@ function upkeep() {
         mv "$SCRIPT_PATH.tmp" "$SCRIPT_PATH"
         chmod +x "$SCRIPT_PATH"
             echo ""
-            echo "Update done!"
+            echo "Update done! Please run tz-acme.sh again."
             exit 0
         fi
     fi
@@ -419,6 +419,6 @@ function dns_full() {
             ;;
     esac
 }
-echo "Welcome to TZ-Bot V0.3 (ACME.SH)"
+echo "Welcome to TZ-Acme.sh V0.4 (ACME.SH)"
 upkeep
 start_prompt
