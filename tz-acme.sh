@@ -1,18 +1,28 @@
 #!/bin/bash
 function upkeep() {
-    #if ! command -v tz-acmesh >/dev/null 2>&1; then
-    #    sudo mkdir -p /usr/local/bin
-    #    if sudo mv /tmp/tz-acmesh /usr/local/bin/tz-acmesh; then
-    #        sudo chmod +x /usr/local/bin/tz-acmesh
-    #        sudo mkdir -p /etc/tz-acmesh
-    #        echo "TZ-acmesh has been installed successfully. You can now run it using the command 'tz-acmesh' or 'sudo tz-acmesh'"
-    #        exit
-    #    else
-    #        echo ""
-    #        echo "Installation failed."
-    #        exit 1
-    #    fi
-    #fi
+    local_version="0.1"
+    version_gt() {
+    [ "$(printf "%s\n%s" "$1" "$2" | sort -V | head -n1)" != "$1" ]
+    }
+    
+    remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt")
+    if [ -z "$remote_version" ]; then
+        echo "Error fetching remote version."
+        exit 1
+    fi
+
+    if version_gt "$remote_version" "$local_version"; then
+        read -n 1 -p "New version found: $remote_version. Do you want to update? (y/n): " update_choice
+        if [[ "$update_choice" == "y" ]]; then
+            curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/tz-acme.sh" \
+                -o "$0.tmp" &&
+            mv "$0.tmp" "$0" &&
+            chmod +x "$0"
+            echo "Update done!"
+        fi
+    fi
+    echo "TZ-acme.sh has been updated to version: (v$local_version)"
+
     if ! command -v /root/.acme.sh/acme.sh >/dev/null 2>&1; then
         echo "acme.sh is not installed."
         read -n 1 -p "Do you want TZ-acmesh to try installing acme.sh? (y/n): " install_choice
