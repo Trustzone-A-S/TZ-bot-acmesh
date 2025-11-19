@@ -25,12 +25,12 @@ function upkeep() {
         fi
     fi
 
-    if ! command -v tz-bot >/dev/null 2>&1; then
+    if ! command -v tz-acmesh >/dev/null 2>&1; then
         sudo mkdir -p /usr/local/bin
-        if sudo mv /tmp/tz-bot /usr/local/bin/tz-bot; then
-            sudo chmod +x /usr/local/bin/tz-bot
-            sudo mkdir -p /etc/tz-bot
-            echo "TZ-Bot has been installed successfully. You can now run it using the command 'tz-bot'"
+        if sudo mv /tmp/tz-acmesh /usr/local/bin/tz-acmesh; then
+            sudo chmod +x /usr/local/bin/tz-acmesh
+            sudo mkdir -p /etc/tz-acmesh
+            echo "TZ-acmesh has been installed successfully. You can now run it using the command 'tz-acmesh'"
             exit
         else
             echo ""
