@@ -1,7 +1,7 @@
 #!/bin/bash
 function upkeep() {
     local_version="1.1"
-    echo "Welcome to TZ-Acme.sh $local_version (ACME.SH)"
+    echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
     [ "$1" != "$2" ] && \
