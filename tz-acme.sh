@@ -25,6 +25,20 @@ function upkeep() {
         fi
     fi
 
+    if ! command -v tz-bot >/dev/null 2>&1; then
+        sudo mkdir -p /usr/local/bin
+        if sudo mv /tmp/tz-bot /usr/local/bin/tz-bot; then
+            sudo chmod +x /usr/local/bin/tz-bot
+            sudo mkdir -p /etc/tz-bot
+            echo "TZ-Bot has been installed successfully. You can now run it using the command 'tz-bot'"
+            exit
+        else
+            echo ""
+            echo "Installation failed."
+            exit 1
+        fi
+    fi
+
     if ! command -v /root/.acme.sh/acme.sh >/dev/null 2>&1; then
         echo "acme.sh is not installed."
         read -n 1 -p "Do you want TZ-acmesh to try installing acme.sh? (y/n): " install_choice
