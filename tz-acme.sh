@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.2.1"
+    local_version="1.2.2"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
@@ -239,20 +239,20 @@ function ordering() {
         read -p "Where should we install it? (E.G: /etc/nginx/certs): " install_path
         echo ""
         echo "What command would you like to use for reloading your webserver upon installation/renewals?"
-        echo "1. sudo systemctl $server reload"
-        echo "2. sudo service $server reload"
+        echo "1. sudo systemctl reload $server"
+        echo "2. sudo service reload $server"
         echo "3. [NGINX ONLY] sudo /etc/init.d/nginx reload"
         echo "4. [APACHE ONLY] sudo /etc/init.d/apache2 reload"
         echo "5. Use a custom command"
         read -n 1 -p "Enter choice [1-5]: " reload_choice
         case $reload_choice in
             1)
-                reload_command="sudo systemctl $server reload"
+                reload_command="sudo systemctl reload $server"
                 echo ""
                 echo "using $reload_command"
                 ;;
             2)
-                reload_command="sudo service $server reload"
+                reload_command="sudo service reload $server"
                 echo ""
                 echo "using $reload_command"
                 ;;
