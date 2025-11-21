@@ -173,11 +173,13 @@ function new_cert() {
             case $server_type in
                 1)
                     val_var="--apache"
+                    server="apache2"
                     echo ""
                     echo "Apache selected"
                     ;;
                 2)
                     val_var="--nginx"
+                    server="nginx"
                     echo ""
                     echo "Nginx selected"
                     ;;
@@ -234,9 +236,46 @@ function ordering() {
     echo "acme.sh command: acme.sh --issue --server https://emea.acme.atlas.globalsign.com/directory $val_var -k 2048 $domain_var"
     if /root/.acme.sh/acme.sh --issue --server https://emea.acme.atlas.globalsign.com/directory $val_var --force -k 2048 $domain_var; then
         echo "Certificate received."
-        read -p "Where should we install it?: " install_path
+        read -p "Where should we install it? (E.G: /etc/nginx/certs): " install_path
         echo ""
-        read -p "What command would you like to use for reloading your webserver upon installation/renewals?: " reload_command
+        echo "What command would you like to use for reloading your webserver upon installation/renewals?"
+        echo "1. sudo systemctl $server reload"
+        echo "2. sudo service $server reload"
+        echo "3. [NGINX ONLY] sudo /etc/init.d/nginx reload"
+        echo "4. [APACHE ONLY] sudo /etc/init.d/apache2 reload"
+        echo "5. Use a custom command"
+        read -n 1 -p "Enter choice [1-5]: " reload_choice
+        case $reload_choice in
+            1)
+                reload_command="sudo systemctl $server reload"
+                echo ""
+                echo "using $reload_command"
+                ;;
+            2)
+                reload_command="sudo service $server reload"
+                echo ""
+                echo "using $reload_command"
+                ;;
+            3)
+                reload_command="sudo /etc/init.d/nginx reload"
+                echo ""
+                echo "using $reload_command"
+                ;;
+            4)
+                reload_command="sudo /etc/init.d/apache2 reload"
+                echo ""
+                echo "using $reload_command"
+                ;;
+            5)
+                read -p "Enter reload command: " reload_command
+                echo ""
+                echo "using $reload_command"
+                ;;
+            *)
+                echo "Invalid choice, exiting."
+                exit 1
+                ;;
+        esac
         echo ""
         if /root/.acme.sh/acme.sh --install-cert -d $domain --fullchain-file $install_path/$domain.crt --key-file $install_path/$domain.key --reloadcmd "$reload_command"; then
             echo ""
