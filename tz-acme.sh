@@ -1,7 +1,9 @@
 #!/bin/bash
 function upkeep() {
     if [ "$EUID" -ne 0 ]; then
-        echo "Fejl: Du skal være root for at køre dette script."
+        echo "Error: You must be the root user, to run tz-acmesh"
+        echo "Use 'sudo -i' to change to the root user, and then run 'tz-acmesh'"
+        echo "Do NOT use 'sudo tz-acmesh'"
         exit 1
     fi
 
@@ -9,8 +11,9 @@ function upkeep() {
     PARENT_CMD=$(ps -o comm= $PPID 2>/dev/null)
 
     if [ "$PARENT_CMD" = "sudo" ]; then
-        echo "Fejl: Scriptet må IKKE køres med 'sudo script.sh'."
-        echo "Log ind som root først, fx med 'sudo -i' eller 'su -'."
+        echo "Error: You must be the root user, to run tz-acmesh"
+        echo "Use 'sudo -i' to change to the root user, and then run 'tz-acmesh'"
+        echo "Do NOT use 'sudo tz-acmesh'"
         exit 1
     fi
     
