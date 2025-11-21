@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.1"
+    local_version="1.2"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
