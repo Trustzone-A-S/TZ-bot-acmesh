@@ -7,7 +7,7 @@ function upkeep() {
     [ "$1" != "$2" ] && \
     [ "$(printf "%s\n%s\n" "$2" "$1" | sort -V | head -n1)" = "$2" ]
     }
-    remote_version=$(curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/version.txt"  | tr -d '\r' | tr -d '\n' | xargs)
+    remote_version=$(curl -fsSL "https://raw.githubusercontent.com/Trustzone-A-S/TZ-bot-acmesh/main/version.txt"  | tr -d '\r' | tr -d '\n' | xargs)
     if [ -z "$remote_version" ]; then
         echo "Error fetching remote version."
         exit 1
@@ -15,7 +15,7 @@ function upkeep() {
     if version_gt "$remote_version" "$local_version"; then
         read -n 1 -p "New version found: $remote_version. Do you want to update? (y/n): " update_choice
         if [[ "$update_choice" == "y" ]]; then
-            curl -fsSL "https://raw.githubusercontent.com/janniktaulan/dev-acme.sh/main/tz-acme.sh" \
+            curl -fsSL "https://raw.githubusercontent.com/Trustzone-A-S/TZ-bot-acmesh/main/tz-acme.sh" \
         -o "$SCRIPT_PATH.tmp" || exit 1
 
         mv "$SCRIPT_PATH.tmp" "$SCRIPT_PATH"
