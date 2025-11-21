@@ -223,10 +223,8 @@ function new_cert() {
     if [[ "$domain" == "*."* ]]; then
         domain_non_wc=""${domain#*.}""
         domain_var="-d "${domain:?}" -d "${domain_non_wc:?}""
-        domain_install="_."${domain#*.}""
     else
         domain_var="-d "${domain:?}""
-        domain_install=""${domain:?}""
     fi
 
     ordering
@@ -240,7 +238,7 @@ function ordering() {
         echo ""
         read -p "What command would you like to use for reloading your webserver upon installation/renewals?: " reload_command
         echo ""
-        if /root/.acme.sh/acme.sh --install-cert -d $domain_install --fullchain-file $install_path/$domain.crt --key-file $install_path/$domain.key --reloadcmd "$reload_command"; then
+        if /root/.acme.sh/acme.sh --install-cert -d $domain --fullchain-file $install_path/$domain.crt --key-file $install_path/$domain.key --reloadcmd "$reload_command"; then
             echo ""
             echo "Certificate installed & automatic renewal enabled"
         else
