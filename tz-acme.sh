@@ -241,6 +241,8 @@ function ordering() {
         if /root/.acme.sh/acme.sh --install-cert -d $domain --fullchain-file $install_path/$domain.crt --key-file $install_path/$domain.key --reloadcmd "$reload_command"; then
             echo ""
             echo "Certificate installed & automatic renewal enabled"
+            echo "Remember to edit your servers configuration file, to use the new cert!"
+            echo "After pointing the server to your new cert, you have to reload it again. After this, everything is automatic."
         else
             echo ""
             echo "Error while installing cert."
