@@ -297,6 +297,7 @@ function uninstall() {
             echo "acme.sh have been uninstalled successfully."
             echo "If you installed acme.sh on a different user than root, you have to uninstall it manually."
         fi
+        rm /usr/local/bin/tz-acmesh
         if command -v tz-acmesh >/dev/null 2>&1; then
             echo "Uninstallation of TZ-acmesh failed. Please remove manually."
         else
