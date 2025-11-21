@@ -1,5 +1,19 @@
 #!/bin/bash
 function upkeep() {
+    if [ "$EUID" -ne 0 ]; then
+        echo "You must run TZ-acmesh as the root user (sudo -i)."
+        echo "You cannot use "sudo TZ-acmesh""
+        exit 1
+    fi
+
+    if [ -n "$SUDO_USER" ]; then
+        if [ -n "$SUDO_COMMAND" ]; then
+            echo "You must run TZ-acmesh as the root user (sudo -i)."
+            echo "You cannot use "sudo TZ-acmesh""
+            exit 1
+        fi
+    fi
+    
     local_version="1.1"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
