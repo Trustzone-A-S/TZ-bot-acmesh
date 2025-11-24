@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.2.5"
+    local_version="1.2.6"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
@@ -392,10 +392,10 @@ function dns_full() {
             read -p "Please enter your Azure Client Secret: " azure_client_secret
             read -p "Please enter your Azure Tenant ID: " azure_tenant_id
             read -p "Please enter your Azure Subscription ID: " azure_subscription_id
-            echo "export AZURE_APPID=\"$azure_client_id\"" > /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_CLIENTSECRET=\"$azure_client_secret\"" >> /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_TENANTID=\"$azure_tenant_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_SUBSCRIPTIONID=\"$azure_subscription_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZUREDNS_APPID=\"$azure_client_id\"" > /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZUREDNS_CLIENTSECRET=\"$azure_client_secret\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZUREDNS_TENANTID=\"$azure_tenant_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZUREDNS_SUBSCRIPTIONID=\"$azure_subscription_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
             chmod 600 /etc/tz-acmesh/scripts/.azure_credentials
             . /etc/tz-acmesh/scripts/.azure_credentials
             ;;
