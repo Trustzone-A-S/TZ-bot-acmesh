@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.2.2"
+    local_version="1.2.3"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
@@ -267,6 +267,7 @@ function ordering() {
                 echo "using $reload_command"
                 ;;
             5)
+                echo ""
                 read -p "Enter reload command: " reload_command
                 echo ""
                 echo "using $reload_command"
