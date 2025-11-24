@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.2.3"
+    local_version="1.2.4"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
@@ -162,32 +162,33 @@ function new_cert() {
     read -n 1 -p "Enter choice [1-3]: " validation_choice
     echo
 
+    echo "Which web server are you using?"
+    echo "1: Apache"
+    echo "2: Nginx"
+    read -n 1 -p "Enter choice [1-2]: " server_type
+    case $server_type in
+        1)
+            val_var="--apache"
+            server="apache2"
+            echo ""
+            echo "Apache selected"
+            ;;
+        2)
+            val_var="--nginx"
+            server="nginx"
+            echo ""
+            echo "Nginx selected"
+            ;;
+            *)
+            echo "Invalid choice, exiting."
+            exit 1
+            ;;
+    esac
+
     case $validation_choice in
         1)
             echo "MODE: Pre-validated"
             echo ""
-            echo "Which web server are you using?"
-            echo "1: Apache"
-            echo "2: Nginx"
-            read -n 1 -p "Enter choice [1-2]: " server_type
-            case $server_type in
-                1)
-                    val_var="--apache"
-                    server="apache2"
-                    echo ""
-                    echo "Apache selected"
-                    ;;
-                2)
-                    val_var="--nginx"
-                    server="nginx"
-                    echo ""
-                    echo "Nginx selected"
-                    ;;
-                *)
-                    echo "Invalid choice, exiting."
-                    exit 1
-                    ;;
-            esac
             read_credentials
             ;;
         2)
