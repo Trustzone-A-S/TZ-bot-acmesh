@@ -7,7 +7,7 @@ function upkeep() {
         exit 1
     fi
 
-# Tjek om parent-processen er sudo (bloker)
+    # Tjek om parent-processen er sudo (bloker)
     PARENT_CMD=$(ps -o comm= $PPID 2>/dev/null)
 
     if [ "$PARENT_CMD" = "sudo" ]; then
@@ -17,7 +17,7 @@ function upkeep() {
         exit 1
     fi
     
-    local_version="1.2.4"
+    local_version="1.2.5"
     echo "Welcome to TZ-Acme.sh V$local_version (ACME.SH)"
     SCRIPT_PATH="$(readlink -f "$BASH_SOURCE")"
     version_gt() {
@@ -392,10 +392,10 @@ function dns_full() {
             read -p "Please enter your Azure Client Secret: " azure_client_secret
             read -p "Please enter your Azure Tenant ID: " azure_tenant_id
             read -p "Please enter your Azure Subscription ID: " azure_subscription_id
-            echo "export AZURE_CLIENT_ID=\"$azure_client_id\"" > /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_CLIENT_SECRET=\"$azure_client_secret\"" >> /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_TENANT_ID=\"$azure_tenant_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
-            echo "export AZURE_SUBSCRIPTION_ID=\"$azure_subscription_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZURE_APPID=\"$azure_client_id\"" > /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZURE_CLIENTSECRET=\"$azure_client_secret\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZURE_TENANTID=\"$azure_tenant_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
+            echo "export AZURE_SUBSCRIPTIONID=\"$azure_subscription_id\"" >> /etc/tz-acmesh/scripts/.azure_credentials
             chmod 600 /etc/tz-acmesh/scripts/.azure_credentials
             . /etc/tz-acmesh/scripts/.azure_credentials
             ;;
